@@ -1,47 +1,12 @@
 import re
+import importlib
+importlib.import_module("ingredients")
 
 
-ingredient_index = {"vinegar":[0,1,0,0,1,0,0,0,0,0,0,0,0,0,0],
-"oil":[0,0,0,0,0,0,0,0,0,1,0,0,0,0,0],
-"flour":[0,0,0,0,0,.2,0,0,0,0,0,0,.75,0,.05],
-"soy sauce":[0,0,1,0,0,0,.5,0,0,0,0,0,0,0,0],
-"onion":[.2,0,0,0,.1,0,.2,0,.1,0,0,.1,.1,.5,0],
-"garlic":[0,0,0,.1,0,0,.4,0,.1,0,0,.1,0,.5,0],
-"salt":[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
-"black pepper": [0,0,0,0,0,0,0,0,.7,0,0,0,0,0,0],
-"jalapeno": [0,0,0,0,0,0,0,.5,0,0,0,0,0,0,0],
-"bell pepper":[.1,0,0,0,.1,0,.2,0,0,0,0,0,0,0,0],
-"sugar":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-"fish":[0,0,0,0,0,0,.6,0,0,.2,0,0,0,0,0],
-"beef":[0,0,0,0,0,0,.8,0,0,.5,0,0,0,0,0],
-"tomatoes":[.2,0,0,0,.5,0,.3,0,0,0,0,.1,0,0,0],
-"milk": [0,0,0,0,0,.5,0,0,0,0,0,0,0,0,.5],
-"lemon":[0,1,0,0,1,0,0,0,0,0,0,0,0,0,0],
-"nut":[.1,0,.1,.05,0,.15,.3,0,0,.3,0,.1,.4,0,.2],
-"butter":[0,0,.1,0,0,.25,.25,0,0,1,0,0,0,0,.75],
-"cream":[0,0,0,0,0,.75,0,0,0,0,0,0,0,0,1],
-"mint":[0,0,0,0,0,0,0,0,0,.1,1,0,0,0,0],
-"cheese":[0,0,.2,0,0,.3,.6,0,0,.1,0,0,0,0,.75],
-"pickle":[0,.5,.5,0,1,0,.8,0,.5,0,0,0,0,.25,0],
-"mushroom":[0,0,0,0,0,.2,.8,0,.1,.1,0,0,.1,0,.1],
-"mustard":[0,.2,0,0,.75,0,.5,0,.5,0,0,0,0,1,0],
-"bacon":[0,0,.8,0,0,0,1,0,0,.8,0,0,0,0,0],
-"noodle":[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
-"potato": [0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
-"seed": [0,0,0,0,0,0,.2,0,0,.1,0,0,.2,0,0],
-"lime":[0,1,0,.2,1,0,0,0,0,0,0,0,0,0,0],
-"rice":[0,0,0,0,0,0,.1,0,0,0,0,0,1,0,0],
-"yogurt":[0,.1,0,0,0,.3,0,0,0,0,0,.1,0,0,.8],
-"ginger":[.1,0,0,0,.2,0,0,0,.7,0,0,.2,0,.8,0],
-"honey":[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-"scallion":[0,0,0,.1,0,0,.2,0,.1,0,0,.1,0,.3,0],
-"carrot":[.25,0,0,0,0,0,.1,0,0,0,0,0,.2,0,0],
-"chicken":[0,0,0,0,0,0,.4,0,0,.1,0,0,0,0,0],
-"squash":[.15,0,0,0,0,.1,.3,0,0,0,0,0,.4,0,.1],
-"cinnamon":[.3,0,0,.05,0,0,0,.05,.8,0,0,.1,0,0,0],
-"broccoli":[0,0,0,.25,0,.1,.08,0,0,0,0,.2,.3,0,0],
-"nothing": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-}
+flavor_profile = ['sweet','sour','salt','bitter','acidic','basic','savory','hotness','spiciness','oily','minty'
+,'astringent','starchiness','horseradish','creamy']
+
+ingredient_index = importlib.import_module("ingredients").ingredient_index
 
 def food_to_vec(_food):
     ingredient = []
@@ -79,16 +44,14 @@ def food_to_vec(_food):
             
     for num in range(len(total)):
         total[num] = round(total[num]/(len(total_ingredients)+1),8) * 10
-        
-        
            
     print(total_ingredients)
     print("amount of ingredients...")
     print(amount)
     print("ingredients...")
     print(ingredient)
-    print("flavor profile...")
-    print(total)
+    for i in range(len(total)):
+        print(flavor_profile[i] + ": " + str(total[i]))
     file.close()
      
 food_to_vec("food2.txt")
