@@ -15,18 +15,32 @@ def food_to_vec(_food):
     total_ingredients = []
     measurements = []
     total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    strings = []
+    find_measurements = []
+    measurement_to_number = ''
     file = open(_food,"r")
     for line in file:
-        i = re.findall(r"\d*.?\d+\scup|\d*.?\d+\steaspoon|\d*.?\d+\stablespoon|\d*.?\d+\spound",line)
-        i = re.findall(r"\d",str(i))
-        res = [int(sub.split('.')[0]) for sub in i]
-        i = str(res)
-        i = i.replace("[","")
-        i = i.replace("]","")
-        if i == "":
+        find_measurements = re.findall(r"\d*.?\d+\scup|\d*.?\d+\steaspoon|\d*.?\d+\stablespoon|\d*.?\d+\spound",line)
+        #find_numbers = re.findall(r"\d*.?\d+",line)
+        print(find_measurements)
+        if "cup" in str(find_measurements):
+            print("found cup!")
+        elif "teaspoon" in str(find_measurements):
+            print('found spoon')
+        elif 'tablespoon' in str(find_measurements):
+            print("found big spoon!")
+        else:
+            print('found nothing :(')
+        
+        find_measurements = re.findall(r"\d",str(find_measurements))
+        measurement_to_number = [int(sub.split('.')[0]) for sub in find_measurements]
+        mtn = str(measurement_to_number)
+        mtn = mtn.replace("[","")
+        mtn = mtn.replace("]","")
+        if mtn == "":
             amount.append(1)
         else:
-            amount.append(int(i))
+            amount.append(int(mtn))
             
         for key in ingredient_index:
             if key in line:
@@ -50,6 +64,8 @@ def food_to_vec(_food):
     print(amount)
     print("ingredients...")
     print(ingredient)
+    print()
+    print(strings)
     for i in range(len(total)):
         print(flavor_profile[i] + ": " + str(total[i]))
     file.close()
