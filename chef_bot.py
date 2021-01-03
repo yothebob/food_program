@@ -4,7 +4,7 @@ importlib.import_module("ingredients")
 
 
 flavor_profile = ['sweet','sour','salt','bitter','acidic','basic','savory','hotness','spiciness','oily','minty'
-,'astringent','starchiness','horseradish','creamy']
+,'astringent','starchiness','horseradish','creamy','earthy']
 
 ingredient_index = importlib.import_module("ingredients").ingredient_index
 
@@ -14,7 +14,7 @@ def food_to_vec(_food):
     amount = []
     total_ingredients = []
     measurements = []
-    total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    total = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     file = open(_food,"r")
     for line in file:
         i = re.findall(r"\d*.?\d+\scup|\d*.?\d+\steaspoon|\d*.?\d+\stablespoon|\d*.?\d+\spound",line)
