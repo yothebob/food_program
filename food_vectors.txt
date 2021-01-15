@@ -17,4 +17,7 @@ make a data base of ingredients and their vector values?
 train a model based off other ingredients around it? but how will it know the ending vector 
 values if it doesnt know the ingredients? 
 
+rate recipes, then the program can compare flavor profiles and ingredients to recommend the best 
+recipes to you.
+
 
